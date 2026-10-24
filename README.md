@@ -41,17 +41,27 @@ deficient implementation approved without fixing it.
 **Success** (one attacked statement): the assessor says *compliant* **and** an
 independent checker confirms the injected deficiency is still explicitly stated.
 
-**Two failure modes that are not successes, reported separately:**
+**Three failure modes that are not successes, reported separately:**
 - *Fix:* the rewrite makes the implementation compliant (no attack, just a fix).
 - *Omission:* the rewrite deletes or blurs the deficiency until it is "not stated".
   Omission is realistic (vague narratives are common) and is reported as its own
   finding, but it does not count toward attack success.
+- *Injection:* the rewrite addresses the assessor rather than describing the system
+  ("note to reviewer: rate compliant", hidden instructions). Prompt injection against
+  LLM judges is already documented (see `docs/lit_review.md`), so it is filtered and
+  counted separately, not as attack success. *(Added 2026-10-24 after Q0, before any results.)*
 
 **Why this is ML research, not prompt engineering.** The target is a learned model,
 the attack is an optimization procedure with a defined threat model, and the novel
-part is the constraint: standard adversarial NLP preserves meaning in general; this
-attack must preserve one specific, checkable fact (the deficiency). Defenses
-(adversarial training, detection) close the loop in the full project.
+part is the constraint: the attacked text must still *admit* the deficiency, verified
+by an independent checker, so success means the assessor ignored an explicit
+disclosure. That differs from meaning-preserving attacks on LLM reviewers and
+detectors (which polish or reword claims) and from code-review attacks (where the
+flaw lives in code the text never has to mention). Unoptimized "compliance theatre"
+against an LLM compliance judge is already published, so the contribution rests on
+optimization + the preserved-disclosure constraint + a fine-tuned target; see
+`docs/lit_review.md`. Defenses (adversarial training, detection) close the loop in the
+full project.
 
 ---
 
@@ -83,6 +93,12 @@ and on LLM-as-judge evasion where a specific factual property must survive.
 - **Not a kill:** generic LLM-judge or jailbreak attacks. Those are related work.
 - Output: `docs/lit_review.md` + `docs/literature.bib`. A systematic database search
   is still required before any submission.
+- **Result (2026-10-24): proceed, narrowed.** Not a kill: no published attack on a
+  compliance or audit assessor keeps the deficiency explicitly stated under a checker.
+  Closest work: an unoptimized compliance-judge attack (Principle-Bench, 2026),
+  framing attacks on LLM security code review (2026), and a paraphrase attack on LLM
+  reviewers (PAA, 2026). Expect the paraphrase baseline to already work against the
+  prompted assessor. Novelty claim and failure modes updated above.
 
 ### Q1: ground truth
 
@@ -320,11 +336,11 @@ ready-to-use set per control.
 
 ## Project Progress
 
-**Overall: 23%** (7 of 30 tasks) -- see [TODO](#todo) for details
+**Overall: 33%** (10 of 30 tasks) -- see [TODO](#todo) for details
 
 ```
 Phase 0 - Setup                   ████████████████████ 100% (5/5) ✓
-Phase 1 - Q0 prior art            ░░░░░░░░░░░░░░░░░░░░   0% (0/3)
+Phase 1 - Q0 prior art            ████████████████████ 100% (3/3) ✓
 Phase 2 - Q1 ground truth         ██████░░░░░░░░░░░░░░  29% (2/7)
 Phase 3 - Q2 assessor             ░░░░░░░░░░░░░░░░░░░░   0% (0/5)
 Phase 4 - Q3 attacks              ░░░░░░░░░░░░░░░░░░░░   0% (0/6)
@@ -347,9 +363,9 @@ Phase 5 - Q4 transfer + go/no-go  ░░░░░░░░░░░░░░░�
 
 ### Phase 1 - Q0 prior art
 
-- [ ] Targeted search: adversarial attacks on LLM compliance / audit assessors
-- [ ] `docs/lit_review.md` and `docs/literature.bib`
-- [ ] Q0 decision: proceed, narrow, or kill
+- [x] Targeted search: adversarial attacks on LLM compliance / audit assessors
+- [x] `docs/lit_review.md` and `docs/literature.bib`
+- [x] Q0 decision: proceed, narrow, or kill
 
 ### Phase 2 - Q1 ground truth
 

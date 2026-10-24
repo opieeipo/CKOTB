@@ -1,0 +1,445 @@
+% Literature reviewed for docs/lit_review.md (Q0 prior-art check, 2026-10-24).
+% Metadata checked against arXiv abstract pages, the ACL Anthology, Crossref and
+% publisher or conference pages. Entries with no peer-reviewed venue are marked
+% "arXiv preprint" in `note`. Nothing here was taken from a secondary summary alone.
+
+% ---------------------------------------------------------------- ML / LLM compliance assessment
+
+@misc{saha2026pace,
+  author        = {Bikash Saha and Sandeep Kumar Shukla},
+  title         = {{AI}-Assisted Cybersecurity Policy Assessment: Evidence Grounding, Coverage Gaps, and Implications for Security Management},
+  year          = {2026},
+  eprint        = {2605.07515},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CR},
+  url           = {https://arxiv.org/abs/2605.07515},
+  note          = {arXiv preprint (v3). PACE: LLM coverage classification of organizational policies against 1,007 SP 800-53 controls; no adversarial evaluation}
+}
+
+@misc{sarkar2026principlebench,
+  author        = {Dipankar Sarkar},
+  title         = {A Four-Axis Trustworthiness Benchmark for {LLM}-as-Judge in Principle-Based Regulation},
+  year          = {2026},
+  eprint        = {2608.14329},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
+  url           = {https://arxiv.org/abs/2608.14329},
+  note          = {Accepted at the KDD 2026 Workshop on Secure and Trustworthy LLMs (SeT-LLM), poster. Workshop paper; arXiv version cited}
+}
+
+@misc{yang2026complibench,
+  author        = {Jingbo Yang and Guanyu Yao and Bairu Hou and Xinghan Yang and Nikolai Glushnev and Iwona Bialynicka-Birula and Duo Ding and Shiyu Chang},
+  title         = {{CompliBench}: Benchmarking {LLM} Judges for Compliance Violation Detection in Dialogue Systems},
+  year          = {2026},
+  eprint        = {2604.12312},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
+  url           = {https://arxiv.org/abs/2604.12312},
+  note          = {arXiv preprint}
+}
+
+@misc{cory2025gdprword,
+  author        = {Thomas Cory and Wolf Rieder and Julia Kr{\"a}mer and Philip Raschke and Patrick Herbke and Axel K{\"u}pper},
+  title         = {Word-level Annotation of {GDPR} Transparency Compliance in Privacy Policies using Large Language Models},
+  year          = {2025},
+  eprint        = {2503.10727},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
+  url           = {https://arxiv.org/abs/2503.10727},
+  note          = {Accepted to Proceedings on Privacy Enhancing Technologies (PoPETs) 2026(1), per arXiv comment; arXiv version cited}
+}
+
+@misc{garza2024privcompkg,
+  author        = {Leon Garza and Lavanya Elluri and Anantaa Kotal and Aritran Piplai and Deepti Gupta and Anupam Joshi},
+  title         = {{PrivComp-KG}: Leveraging Knowledge Graph and Large Language Models for Privacy Policy Compliance Verification},
+  year          = {2024},
+  eprint        = {2404.19744},
+  archivePrefix = {arXiv},
+  url           = {https://arxiv.org/abs/2404.19744},
+  note          = {arXiv preprint}
+}
+
+@misc{fedramp2026m2415automation,
+  author       = {{FedRAMP}},
+  title        = {Automation and Efficiency -- {FedRAMP} Consolidated Rules for 2026 ({OMB} {M-24-15}, Section {V})},
+  year         = {2026},
+  howpublished = {\url{https://fedramp.gov/2026/authority/m-24-15/automation/}},
+  note         = {States the FedRAMP PMO will pilot AI in security assessment review and continuous monitoring; OSCAL for machine-readable artifacts. Accessed 2026-10-24}
+}
+
+% ---------------------------------------------------------------- attacks on reviewers, graders, screeners
+
+@misc{kaneko2026paa,
+  author        = {Masahiro Kaneko},
+  title         = {Paraphrasing Adversarial Attack on {LLM}-as-a-Reviewer},
+  year          = {2026},
+  eprint        = {2601.06884},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
+  url           = {https://arxiv.org/abs/2601.06884},
+  note          = {arXiv preprint; no venue found (DBLP lists as CoRR)}
+}
+
+@inproceedings{lin2025breaking,
+  author    = {Tzu-Ling Lin and Wei-Chih Chen and Teng-Fang Hsiao and Hou-I Liu and Ya-Hsin Yeh and Yu-Kai Chan and Wen-Sheng Lien and Po-Yen Kuo and Philip S. Yu and Hong-Han Shuai},
+  title     = {Breaking the Reviewer: Assessing the Vulnerability of Large Language Models in Automated Peer Review Under Textual Adversarial Attacks},
+  booktitle = {Findings of the Association for Computational Linguistics: EMNLP 2025},
+  pages     = {4819--4839},
+  year      = {2025},
+  address   = {Suzhou, China},
+  publisher = {Association for Computational Linguistics},
+  doi       = {10.18653/v1/2025.findings-emnlp.259},
+  url       = {https://aclanthology.org/2025.findings-emnlp.259/}
+}
+
+@article{lin2026hiddenprompts,
+  author  = {Zhicheng Lin},
+  title   = {Hidden Prompts in Manuscripts Exploit {AI}-Assisted Peer Review},
+  journal = {Communications of the ACM},
+  volume  = {69},
+  number  = {7},
+  pages   = {53--56},
+  year    = {2026},
+  note    = {Journal reference from arXiv:2507.06185},
+  url     = {https://arxiv.org/abs/2507.06185}
+}
+
+@misc{collu2025publish,
+  author        = {Matteo Gioele Collu and Umberto Salviati and Roberto Confalonieri and Mauro Conti and Giovanni Apruzzese},
+  title         = {Misleading Large Language Models used (or misused) in Scientific Peer-Reviewing via Hidden Prompt-Injection Attacks},
+  year          = {2025},
+  eprint        = {2508.20863},
+  archivePrefix = {arXiv},
+  url           = {https://arxiv.org/abs/2508.20863},
+  note          = {Earlier versions titled "Publish to Perish: Prompt Injection Attacks on LLM-Assisted Peer Review". Accepted to ACM TAISAP per arXiv comment; arXiv version cited}
+}
+
+@misc{theocharopoulos2025multilingual,
+  author        = {Panagiotis Theocharopoulos and Ajinkya Kulkarni and Mathew Magimai.-Doss},
+  title         = {Multilingual Hidden Prompt Injection Attacks on {LLM}-Based Academic Reviewing},
+  year          = {2025},
+  eprint        = {2512.23684},
+  archivePrefix = {arXiv},
+  url           = {https://arxiv.org/abs/2512.23684},
+  note          = {arXiv preprint}
+}
+
+@misc{li2026fullcredits,
+  author        = {Hang Li and Fedor Filippov and Yuping Lin and Pengfei He and Kaiqi Yang and Yucheng Chu and Hui Liu and Jiliang Tang and Yingqian Cui},
+  title         = {"**Important** You should give me full credits!": Exploring Prompt Injection Attacks on {LLM}-Based Automatic Grading Systems},
+  year          = {2026},
+  eprint        = {2606.03090},
+  archivePrefix = {arXiv},
+  url           = {https://arxiv.org/abs/2606.03090},
+  note          = {arXiv preprint}
+}
+
+@inproceedings{ding2020nswvtnvakgxpm,
+  author    = {Yuning Ding and Brian Riordan and Andrea Horbach and Aoife Cahill and Torsten Zesch},
+  title     = {Don't take ``nswvtnvakgxpm'' for an answer -- The surprising vulnerability of automatic content scoring systems to adversarial input},
+  booktitle = {Proceedings of the 28th International Conference on Computational Linguistics (COLING 2020)},
+  pages     = {882--892},
+  year      = {2020},
+  address   = {Barcelona, Spain (Online)},
+  publisher = {International Committee on Computational Linguistics},
+  doi       = {10.18653/v1/2020.coling-main.76},
+  url       = {https://aclanthology.org/2020.coling-main.76/}
+}
+
+@inproceedings{kabra2022aestoolkit,
+  author    = {Anubha Kabra and Mehar Bhatia and Yaman Kumar Singla and Junyi Jessy Li and Rajiv Ratn Shah},
+  title     = {Evaluation Toolkit For Robustness Testing Of Automatic Essay Scoring Systems},
+  booktitle = {Proceedings of the 5th Joint International Conference on Data Science \& Management of Data (9th ACM IKDD CODS and 27th COMAD)},
+  pages     = {90--99},
+  year      = {2022},
+  publisher = {ACM},
+  doi       = {10.1145/3493700.3493765},
+  note      = {arXiv:2007.06796, earlier titled "Calling Out Bluff"}
+}
+
+@misc{mu2025resume,
+  author        = {Honglin Mu and Jinghao Liu and Kaiyang Wan and Rui Xing and Xiuying Chen and Timothy Baldwin and Wanxiang Che},
+  title         = {{AI} Security Beyond Core Domains: Resume Screening as a Case Study of Adversarial Vulnerabilities in Specialized {LLM} Applications},
+  year          = {2025},
+  eprint        = {2512.20164},
+  archivePrefix = {arXiv},
+  url           = {https://arxiv.org/abs/2512.20164},
+  note          = {arXiv preprint}
+}
+
+% ---------------------------------------------------------------- code review / vulnerability detection (preserved-flaw analogs)
+
+@misc{alexopoulos2026contextualbias,
+  author        = {Georgios Alexopoulos and Nikolaos Alexopoulos and Diomidis Spinellis and Dimitris Mitropoulos},
+  title         = {Measuring and Exploiting Contextual Bias in {LLM}-Assisted Security Code Review},
+  year          = {2026},
+  eprint        = {2603.18740},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CR},
+  url           = {https://arxiv.org/abs/2603.18740},
+  note          = {arXiv preprint}
+}
+
+@misc{melo2026sevra,
+  author        = {Rui Melo and Riccardo Fogliato and Sean Zhou and Pratiksha Thaker and Zhiwei Steven Wu},
+  title         = {{SEVRA-BENCH}: Social Engineering of Vulnerabilities in Review Agents},
+  year          = {2026},
+  eprint        = {2606.13757},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CR},
+  url           = {https://arxiv.org/abs/2606.13757},
+  note          = {arXiv preprint}
+}
+
+@misc{thornton2026comments,
+  author        = {Scott Thornton},
+  title         = {Can Adversarial Code Comments Fool {AI} Security Reviewers -- Large-Scale Empirical Study of Comment-Based Attacks and Defenses Against {LLM} Code Analysis},
+  year          = {2026},
+  eprint        = {2602.16741},
+  archivePrefix = {arXiv},
+  url           = {https://arxiv.org/abs/2602.16741},
+  note          = {arXiv preprint}
+}
+
+@misc{sun2026vulnevasion,
+  author        = {Luze Sun and Alina Oprea and Eric Wong},
+  title         = {Syntax- and Compilation-Preserving Evasion of {LLM} Vulnerability Detectors},
+  year          = {2026},
+  eprint        = {2602.00305},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CR},
+  url           = {https://arxiv.org/abs/2602.00305},
+  note          = {arXiv preprint; v1 titled "Semantics-Preserving Evasion of LLM Vulnerability Detectors"}
+}
+
+% ---------------------------------------------------------------- LLM-as-a-judge manipulation
+
+@inproceedings{zheng2023mtbench,
+  author    = {Lianmin Zheng and Wei-Lin Chiang and Ying Sheng and Siyuan Zhuang and Zhanghao Wu and Yonghao Zhuang and Zi Lin and Zhuohan Li and Dacheng Li and Eric P. Xing and Hao Zhang and Joseph E. Gonzalez and Ion Stoica},
+  title     = {Judging {LLM}-as-a-Judge with {MT-Bench} and {Chatbot Arena}},
+  booktitle = {Advances in Neural Information Processing Systems 36 (NeurIPS 2023), Datasets and Benchmarks Track},
+  year      = {2023},
+  eprint    = {2306.05685},
+  archivePrefix = {arXiv},
+  url       = {https://arxiv.org/abs/2306.05685}
+}
+
+@inproceedings{shi2024judgedeceiver,
+  author    = {Jiawen Shi and Zenghui Yuan and Yinuo Liu and Yue Huang and Pan Zhou and Lichao Sun and Neil Zhenqiang Gong},
+  title     = {Optimization-based Prompt Injection Attack to {LLM}-as-a-Judge},
+  booktitle = {Proceedings of the 2024 ACM SIGSAC Conference on Computer and Communications Security (CCS '24)},
+  pages     = {660--674},
+  year      = {2024},
+  publisher = {ACM},
+  doi       = {10.1145/3658644.3690291},
+  eprint    = {2403.17710},
+  archivePrefix = {arXiv}
+}
+
+@inproceedings{raina2024judgerobust,
+  author    = {Vyas Raina and Adian Liusie and Mark Gales},
+  title     = {Is {LLM}-as-a-Judge Robust? Investigating Universal Adversarial Attacks on Zero-shot {LLM} Assessment},
+  booktitle = {Proceedings of the 2024 Conference on Empirical Methods in Natural Language Processing},
+  pages     = {7499--7517},
+  year      = {2024},
+  address   = {Miami, Florida, USA},
+  publisher = {Association for Computational Linguistics},
+  doi       = {10.18653/v1/2024.emnlp-main.427},
+  url       = {https://aclanthology.org/2024.emnlp-main.427/}
+}
+
+@inproceedings{zheng2025cheating,
+  author    = {Xiaosen Zheng and Tianyu Pang and Chao Du and Qian Liu and Jing Jiang and Min Lin},
+  title     = {Cheating Automatic {LLM} Benchmarks: Null Models Achieve High Win Rates},
+  booktitle = {The Thirteenth International Conference on Learning Representations (ICLR 2025)},
+  year      = {2025},
+  note      = {Oral},
+  eprint    = {2410.07137},
+  archivePrefix = {arXiv},
+  url       = {https://arxiv.org/abs/2410.07137}
+}
+
+@inproceedings{zhao2025onetoken,
+  author    = {Yulai Zhao and Haolin Liu and Dian Yu and Sunyuan Kung and Meijia Chen and Haitao Mi and Dong Yu},
+  title     = {One Token to Fool {LLM}-as-a-Judge},
+  booktitle = {Advances in Neural Information Processing Systems (NeurIPS 2025)},
+  year      = {2025},
+  eprint    = {2507.08794},
+  archivePrefix = {arXiv},
+  url       = {https://neurips.cc/virtual/2025/poster/131135},
+  note      = {Poster; NeurIPS 2025 virtual listing}
+}
+
+@misc{li2025robustjudge,
+  author        = {Songze Li and Chuokun Xu and Jiaying Wang and Xueluan Gong and Chen Chen and Jirui Zhang and Jun Wang and Kwok-Yan Lam and Shouling Ji},
+  title         = {{LLMs} Cannot Reliably Judge (Yet?): A Comprehensive Assessment on the Robustness of {LLM}-as-a-Judge},
+  year          = {2025},
+  eprint        = {2506.09443},
+  archivePrefix = {arXiv},
+  url           = {https://arxiv.org/abs/2506.09443},
+  note          = {arXiv preprint (RobustJudge)}
+}
+
+@misc{maloyan2025judgeinjection,
+  author        = {Narek Maloyan and Dmitry Namiot},
+  title         = {Adversarial Attacks on {LLM}-as-a-Judge Systems: Insights from Prompt Injections},
+  year          = {2025},
+  eprint        = {2504.18333},
+  archivePrefix = {arXiv},
+  url           = {https://arxiv.org/abs/2504.18333},
+  note          = {arXiv preprint}
+}
+
+@misc{masoud2026judgesok,
+  author        = {Aiman Al Masoud and Antony Anju and Marco Arazzi and Mert Cihangiroglu and Vignesh Kumar Kembu and Serena Nicolazzo and Antonino Nocera and Vinod P. and Saraga Sakthidharan},
+  title         = {Security in {LLM}-as-a-Judge: A Comprehensive {SoK}},
+  year          = {2026},
+  eprint        = {2603.29403},
+  archivePrefix = {arXiv},
+  url           = {https://arxiv.org/abs/2603.29403},
+  note          = {arXiv preprint}
+}
+
+@inproceedings{zeng2024johnny,
+  author    = {Yi Zeng and Hongpeng Lin and Jingwen Zhang and Diyi Yang and Ruoxi Jia and Weiyan Shi},
+  title     = {How {Johnny} Can Persuade {LLMs} to Jailbreak Them: Rethinking Persuasion to Challenge {AI} Safety by Humanizing {LLMs}},
+  booktitle = {Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)},
+  pages     = {14322--14350},
+  year      = {2024},
+  address   = {Bangkok, Thailand},
+  publisher = {Association for Computational Linguistics},
+  doi       = {10.18653/v1/2024.acl-long.773},
+  url       = {https://aclanthology.org/2024.acl-long.773/}
+}
+
+@inproceedings{greshake2023indirect,
+  author    = {Kai Greshake and Sahar Abdelnabi and Shailesh Mishra and Christoph Endres and Thorsten Holz and Mario Fritz},
+  title     = {Not What You've Signed Up For: Compromising Real-World {LLM}-Integrated Applications with Indirect Prompt Injection},
+  booktitle = {Proceedings of the 16th ACM Workshop on Artificial Intelligence and Security (AISec '23)},
+  pages     = {79--90},
+  year      = {2023},
+  publisher = {ACM},
+  doi       = {10.1145/3605764.3623985}
+}
+
+% ---------------------------------------------------------------- fact-constrained attacks
+
+@inproceedings{abdelnabi2023factsaboteurs,
+  author    = {Sahar Abdelnabi and Mario Fritz},
+  title     = {Fact-Saboteurs: A Taxonomy of Evidence Manipulation Attacks against Fact-Verification Systems},
+  booktitle = {32nd USENIX Security Symposium (USENIX Security 23)},
+  year      = {2023},
+  address   = {Anaheim, CA},
+  publisher = {USENIX Association},
+  url       = {https://www.usenix.org/conference/usenixsecurity23/presentation/abdelnabi},
+  eprint    = {2209.03755},
+  archivePrefix = {arXiv}
+}
+
+@misc{bethany2025camouflage,
+  author        = {Mazal Bethany and Nishant Vishwamitra and Cho-Yu Jason Chiang and Peyman Najafirad},
+  title         = {{CAMOUFLAGE}: Exploiting Misinformation Detection Systems Through {LLM}-driven Adversarial Claim Transformation},
+  year          = {2025},
+  eprint        = {2505.01900},
+  archivePrefix = {arXiv},
+  url           = {https://arxiv.org/abs/2505.01900},
+  note          = {arXiv preprint}
+}
+
+@misc{chen2024realtimefactuality,
+  author        = {Sanxing Chen and Yukun Huang and Bhuwan Dhingra},
+  title         = {Real-time Factuality Assessment from Adversarial Feedback},
+  year          = {2024},
+  eprint        = {2410.14651},
+  archivePrefix = {arXiv},
+  url           = {https://arxiv.org/abs/2410.14651},
+  note          = {arXiv preprint; earlier versions titled "Real-time Fake News from Adversarial Feedback"}
+}
+
+@misc{jian2026evoharm,
+  author        = {Ruijie Jian and Benlei Cui and Ting Ma and Haidong Ding and Kangwei Liu and Ziwen Xu and Longtao Huang and Hui Xue and Ziqiang Zhu and Junjie Li and Haiwen Hong},
+  title         = {{EvoHarmBench}: Breaking Content Moderation with Iterative Human-Like Evasion},
+  year          = {2026},
+  eprint        = {2608.27844},
+  archivePrefix = {arXiv},
+  url           = {https://arxiv.org/abs/2608.27844},
+  note          = {Accepted to Findings of EMNLP 2026 per arXiv comment; arXiv version cited}
+}
+
+@inproceedings{morris2020reevaluating,
+  author    = {John Morris and Eli Lifland and Jack Lanchantin and Yangfeng Ji and Yanjun Qi},
+  title     = {Reevaluating Adversarial Examples in Natural Language},
+  booktitle = {Findings of the Association for Computational Linguistics: EMNLP 2020},
+  pages     = {3829--3839},
+  year      = {2020},
+  publisher = {Association for Computational Linguistics},
+  doi       = {10.18653/v1/2020.findings-emnlp.341},
+  url       = {https://aclanthology.org/2020.findings-emnlp.341/}
+}
+
+% ---------------------------------------------------------------- method baselines
+
+@inproceedings{jin2020textfooler,
+  author    = {Di Jin and Zhijing Jin and Joey Tianyi Zhou and Peter Szolovits},
+  title     = {Is {BERT} Really Robust? A Strong Baseline for Natural Language Attack on Text Classification and Entailment},
+  booktitle = {Proceedings of the AAAI Conference on Artificial Intelligence},
+  volume    = {34},
+  number    = {05},
+  pages     = {8018--8025},
+  year      = {2020},
+  doi       = {10.1609/aaai.v34i05.6311}
+}
+
+@inproceedings{li2020bertattack,
+  author    = {Linyang Li and Ruotian Ma and Qipeng Guo and Xiangyang Xue and Xipeng Qiu},
+  title     = {{BERT-ATTACK}: Adversarial Attack Against {BERT} Using {BERT}},
+  booktitle = {Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing (EMNLP)},
+  pages     = {6193--6202},
+  year      = {2020},
+  publisher = {Association for Computational Linguistics},
+  doi       = {10.18653/v1/2020.emnlp-main.500},
+  url       = {https://aclanthology.org/2020.emnlp-main.500/}
+}
+
+@inproceedings{morris2020textattack,
+  author    = {John Morris and Eli Lifland and Jin Yong Yoo and Jake Grigsby and Di Jin and Yanjun Qi},
+  title     = {{TextAttack}: A Framework for Adversarial Attacks, Data Augmentation, and Adversarial Training in {NLP}},
+  booktitle = {Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing: System Demonstrations},
+  pages     = {119--126},
+  year      = {2020},
+  publisher = {Association for Computational Linguistics},
+  doi       = {10.18653/v1/2020.emnlp-demos.16},
+  url       = {https://aclanthology.org/2020.emnlp-demos.16/}
+}
+
+@inproceedings{chao2025pair,
+  author    = {Patrick Chao and Alexander Robey and Edgar Dobriban and Hamed Hassani and George J. Pappas and Eric Wong},
+  title     = {Jailbreaking Black Box Large Language Models in Twenty Queries},
+  booktitle = {2025 IEEE Conference on Secure and Trustworthy Machine Learning (SaTML)},
+  pages     = {23--42},
+  year      = {2025},
+  publisher = {IEEE},
+  doi       = {10.1109/SaTML64287.2025.00010},
+  eprint    = {2310.08419},
+  archivePrefix = {arXiv}
+}
+
+@inproceedings{mehrotra2024tap,
+  author    = {Anay Mehrotra and Manolis Zampetakis and Paul Kassianik and Blaine Nelson and Hyrum Anderson and Yaron Singer and Amin Karbasi},
+  title     = {Tree of Attacks: Jailbreaking Black-Box {LLMs} Automatically},
+  booktitle = {Advances in Neural Information Processing Systems 37 (NeurIPS 2024)},
+  year      = {2024},
+  eprint    = {2312.02119},
+  archivePrefix = {arXiv},
+  url       = {https://arxiv.org/abs/2312.02119}
+}
+
+@misc{zou2023gcg,
+  author        = {Andy Zou and Zifan Wang and Nicholas Carlini and Milad Nasr and J. Zico Kolter and Matt Fredrikson},
+  title         = {Universal and Transferable Adversarial Attacks on Aligned Language Models},
+  year          = {2023},
+  eprint        = {2307.15043},
+  archivePrefix = {arXiv},
+  url           = {https://arxiv.org/abs/2307.15043},
+  note          = {arXiv preprint (GCG)}
+}
