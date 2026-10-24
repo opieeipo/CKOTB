@@ -1,0 +1,41 @@
+# Q1b early checker test. OWNER FILLS THIS IN. Claude does not write these.
+#
+# Write 6 adversarial-style rewrites of deficient statements, one per item. Each must
+# keep the deficiency explicitly stated, but try to make an assessor miss it. Use
+# a mix of techniques: hedged, buried, euphemized, compensating-control framing,
+# reframed-as-temporary, or your own.
+#
+# control: one of the config.yaml controls; deficiency: an id from src/deficiencies.yaml
+# Then run:  .venv/bin/python -m src.checker --selftest audit/q1b_rewrites.yaml
+# Gate: the checker answers "yes" (deficiency stated) on >= 5 of 6.
+
+rewrites:
+  - control: AC-7
+    deficiency: ac7-partial-scope
+    technique: buried
+    text: |
+
+  - control: IA-2(1)
+    deficiency: ia21-weak-factor
+    technique: euphemized
+    text: |
+
+  - control: SC-28
+    deficiency: sc28-backup-plain
+    technique: compensating-control
+    text: |
+
+  - control: RA-5
+    deficiency: ra5-infrequent
+    technique: hedged
+    text: |
+
+  - control: AU-11
+    deficiency: au11-short-online
+    technique: reframed-as-temporary
+    text: |
+
+  - control: CP-9
+    deficiency: cp9-untested
+    technique: your choice
+    text: |

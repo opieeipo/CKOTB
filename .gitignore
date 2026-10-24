@@ -1,0 +1,26 @@
+# Data: raw sources and the model-call cache stay local; corpus and processed are versioned
+data/raw/**
+data/cache/**
+!data/*/.gitkeep
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Environment and secrets (API keys)
+.env
+.env.*
+
+# OS and editor cruft
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

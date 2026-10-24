@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ckotb-spike"
+version = "0.0.1"
+description = "Feasibility spike: adversarial attacks on ML compliance assessors under a preserved-deficiency constraint"
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.12"
+dependencies = [
+    "requests==2.34.2",
+    "pyyaml==6.0.3",
+    "pandas==3.1.0",
+    "pyarrow==26.0.0",
+    "openpyxl==3.1.5",
+    "python-docx==1.2.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest==9.1.1"]
+
+[tool.setuptools]
+packages = ["src"]
+
+[tool.setuptools.package-data]
+src = ["deficiencies.yaml"]

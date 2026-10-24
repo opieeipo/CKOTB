@@ -1,0 +1,33 @@
+# Pre-registered 2026-10-24. Gates are fixed before any corpus is generated or model scored.
+controls: [AC-2, AC-7, IA-2(1), IA-5, AU-11, SC-8, SC-28, CM-7, SI-2, RA-5, CP-9]
+parameters_from: fedramp_moderate
+
+# Model families. No cloud API keys are configured, so the spike runs on local Ollama
+# models. The checker family differs from every generator, assessor and attacker family.
+models:
+  family_a: {provider: ollama, model: "qwen2.5:7b", family: qwen}        # generator A
+  family_b: {provider: ollama, model: "llama3.1:8b", family: llama}      # generator B
+  family_c: {provider: ollama, model: "gemma4:12b", family: gemma}       # checker
+  family_d: {provider: ollama, model: "phi4:14b", family: phi}           # prompted assessor (local stand-in)
+generators: [family_a, family_b]
+assessors:
+  finetuned: microsoft/deberta-v3-base
+  # README target is a closed LLM. No API key is configured, so Q2/Q3 use a local open
+  # stand-in from a fourth family; the closed model is added as the Q4 transfer target.
+  prompted: family_d                  # given control text + 800-53A objectives + parameter values
+checker: family_c                     # differs from assessor and attacker families
+# held_out_generator is run in both directions (A->B, B->A); the Q2 gate uses the lower F1.
+# held_out_controls holds out 3 controls drawn with `seed`. Clarified 2026-10-24, before any results.
+splits: [random, held_out_controls, held_out_generator]
+attacks:
+  paraphrase: {}
+  textattack: [textfooler, bert_attack]
+  pair: {query_budget: 20}
+gates:
+  q1: {min_statements: 2000, min_audit_agreement: 0.90, audit_n: 100,
+       checker_selftest_min: 5, checker_selftest_n: 6}
+  q2: {min_f1_held_out_generator: 0.85, min_f1_prompted: 0.85}
+  q3: {min_checker_agreement: 0.90, checker_audit_n: 50,
+       min_attack_success: 0.30, min_gain_over_paraphrase: 0.15}
+paths: {raw: data/raw, cache: data/cache, corpus: data/corpus, processed: data/processed, audit: audit}
+seed: 0

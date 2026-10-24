@@ -1,0 +1,305 @@
+# Deficiency catalog (Q1). Finalized 2026-10-24, before any corpus generation.
+#
+# Per control:
+#   params:   organization-defined values. `fedramp` = FedRAMP Rev. 5 Moderate baseline;
+#             `spike`  = FedRAMP is silent (defers to SP 800-63B etc.), so the value is fixed here.
+#   require:  what a compliant implementation must explicitly state (given to the generator
+#             for compliant statements; every deficient statement states all but one).
+#   deficiencies: id, the requirement it breaks (`breaks`, index into require),
+#             `inject` (what the deficient implementation does, as the generator must state it),
+#             `check` (the checker's narrow extraction question; "yes" = deficiency stated).
+#
+# Changes from the README draft: IA-5 "password reuse allowed" dropped (SP 800-63B, which
+# FedRAMP adopts, does not require password history, so it is not a crisp deficiency);
+# AC-2 "inactive accounts not disabled" scoped to AC-2(h)/(f) notification and removal.
+
+AC-2:
+  params:
+    review: {value: "quarterly for privileged accounts, annually for non-privileged accounts", source: fedramp}
+    notify_terminated: {value: "within 24 hours", source: fedramp}
+    notify_transfer: {value: "within 8 hours", source: fedramp}
+  require:
+    - account requests are approved by designated account managers before accounts are created
+    - account managers are notified within 24 hours when accounts are no longer required or users are terminated, and within 8 hours when users are transferred
+    - accounts of terminated or transferred users are disabled or removed promptly after notification
+    - accounts are reviewed for compliance with account management requirements quarterly for privileged accounts and annually for non-privileged accounts
+  deficiencies:
+    - id: ac2-no-approval
+      breaks: 0
+      inject: some accounts (for example contractor or developer accounts) are created by administrators directly without approval from a designated account manager
+      check: Does the text state that some accounts are created without approval from a designated approver or account manager?
+    - id: ac2-slow-notify
+      breaks: 1
+      inject: HR notifies account managers of terminations and transfers in a weekly batch report rather than within 24 hours / 8 hours
+      check: Does the text state that account managers are notified of terminations or transfers later than 24 hours (for example weekly or in a periodic batch)?
+    - id: ac2-not-disabled
+      breaks: 2
+      inject: accounts of terminated users are left enabled until the next scheduled review instead of being disabled when the termination is reported
+      check: Does the text state that accounts of terminated or departed users remain enabled after termination (for example until a later review)?
+    - id: ac2-no-review
+      breaks: 3
+      inject: privileged accounts are reviewed only annually (or not on a defined schedule), not quarterly
+      check: Does the text state that privileged accounts are reviewed less often than quarterly, or not on any defined schedule?
+
+AC-7:
+  params:
+    attempts: {value: "3 consecutive invalid logon attempts", source: spike}
+    window: {value: "15 minutes", source: spike}
+    action: {value: "lock the account for at least 30 minutes or until released by an administrator", source: spike}
+  require:
+    - the system enforces a limit of 3 consecutive invalid logon attempts by a user during a 15-minute period
+    - when the limit is exceeded the account is locked for at least 30 minutes or until released by an administrator
+    - the limit applies to all access paths (web console, API, SSH / remote administration)
+  deficiencies:
+    - id: ac7-no-lockout
+      breaks: 1
+      inject: failed logon attempts are logged and alerted on, but accounts are never locked or delayed
+      check: Does the text state that accounts are not locked (or logons not delayed) after repeated failed logon attempts?
+    - id: ac7-loose-threshold
+      breaks: 0
+      inject: the lockout threshold is 10 consecutive invalid attempts
+      check: Does the text state a lockout threshold greater than 3 consecutive invalid logon attempts?
+    - id: ac7-short-lock
+      breaks: 1
+      inject: locked accounts unlock automatically after 2 minutes
+      check: Does the text state that a locked account unlocks automatically in less than 30 minutes?
+    - id: ac7-partial-scope
+      breaks: 2
+      inject: the lockout applies to the web console only; API and SSH logons have no attempt limit
+      check: Does the text state that some access path (for example API, SSH or command line) has no limit on failed logon attempts?
+
+IA-2(1):
+  params:
+    mfa: {value: "phishing-resistant multi-factor authentication for all privileged accounts", source: fedramp}
+  require:
+    - all privileged accounts must use multi-factor authentication for every access path (console, SSH, API, cloud management plane)
+    - the multi-factor authentication is phishing-resistant (for example FIDO2/WebAuthn or PIV/CAC)
+    - no privileged account is exempt from multi-factor authentication
+  deficiencies:
+    - id: ia21-no-mfa
+      breaks: 0
+      inject: privileged administrators authenticate with a username and password only; MFA is used for non-privileged users only
+      check: Does the text state that privileged accounts authenticate without multi-factor authentication (for example password only)?
+    - id: ia21-path-gap
+      breaks: 0
+      inject: MFA is required for the privileged web console, but privileged SSH access to servers uses key-only or password-only authentication without a second factor
+      check: Does the text state that some privileged access path (for example SSH, CLI or API) does not require multi-factor authentication?
+    - id: ia21-weak-factor
+      breaks: 1
+      inject: the second factor for privileged users is a one-time code sent by SMS text message
+      check: Does the text state that privileged users' second factor is SMS, voice call or email one-time codes (not phishing-resistant)?
+    - id: ia21-exempt
+      breaks: 2
+      inject: a set of shared emergency administrator accounts used for routine maintenance are exempt from MFA
+      check: Does the text state that some privileged accounts (for example shared, emergency or service administrator accounts) are exempt from multi-factor authentication?
+
+IA-5:
+  params:
+    standard: {value: "SP 800-63B AAL2", source: fedramp}
+  require:
+    - default authenticators (vendor default passwords and keys) are changed before devices or software are put into service
+    - initial authenticators are distributed through a secure channel with identity verified
+    - authenticators are protected from unauthorized disclosure and modification (stored hashed or encrypted, never in plaintext)
+    - authenticators are changed or refreshed immediately when compromise is suspected
+  deficiencies:
+    - id: ia5-defaults
+      breaks: 0
+      inject: some network appliances keep the vendor default administrator password because changing it breaks vendor support
+      check: Does the text state that some devices or software keep vendor default passwords or credentials?
+    - id: ia5-insecure-initial
+      breaks: 1
+      inject: initial passwords for new users are sent in plaintext email to the user's supervisor
+      check: Does the text state that initial passwords or authenticators are distributed in plaintext or over an unprotected channel (for example plain email)?
+    - id: ia5-plaintext-store
+      breaks: 2
+      inject: service account passwords are stored in plaintext in a configuration file in the code repository
+      check: Does the text state that some passwords or authenticators are stored in plaintext or unencrypted?
+    - id: ia5-no-change-on-compromise
+      breaks: 3
+      inject: when a credential compromise is suspected, the credential is not changed until its next scheduled rotation
+      check: Does the text state that suspected-compromised credentials are not changed immediately (for example only at the next scheduled rotation)?
+
+AU-11:
+  params:
+    online: {value: "at least 90 days online", source: fedramp}
+    offline: {value: "offline preservation in accordance with NARA requirements (M-21-31)", source: fedramp}
+  require:
+    - audit records are retained online for at least 90 days
+    - audit records are then preserved offline per NARA records retention requirements and M-21-31
+    - retention covers all audit record sources within the boundary
+  deficiencies:
+    - id: au11-short-online
+      breaks: 0
+      inject: audit records are kept online for 30 days
+      check: Does the text state that audit records are retained online for fewer than 90 days?
+    - id: au11-no-offline
+      breaks: 1
+      inject: audit records are permanently deleted after the online retention period; there is no offline or archival copy
+      check: Does the text state that audit records are deleted after the online period without offline or archival preservation?
+    - id: au11-source-gap
+      breaks: 2
+      inject: database audit logs are excluded from the central retention and kept only 7 days on the database host
+      check: Does the text state that some audit record source is retained for a shorter period or excluded from the retention policy?
+    - id: au11-capacity-purge
+      breaks: 0
+      inject: when log storage reaches capacity, the oldest audit records are overwritten regardless of age
+      check: Does the text state that audit records may be overwritten or deleted when storage fills, regardless of the retention period?
+
+SC-8:
+  params:
+    protect: {value: "confidentiality AND integrity", source: fedramp}
+    tls: {value: "TLS 1.2 or higher with FIPS-validated cryptography", source: spike}
+  require:
+    - all external data in transit is protected with TLS 1.2 or higher; older protocol versions are disabled
+    - internal traffic between components within the boundary is also encrypted
+    - administrative access uses encrypted protocols only (SSH, HTTPS), never Telnet or FTP
+    - certificates are validated on all connections
+  deficiencies:
+    - id: sc8-legacy-tls
+      breaks: 0
+      inject: TLS 1.0 and 1.1 remain enabled on the public load balancer for compatibility with older agency clients
+      check: Does the text state that TLS 1.0, TLS 1.1 or SSL is still enabled or accepted?
+    - id: sc8-internal-plain
+      breaks: 1
+      inject: traffic between application servers and the database inside the private network is unencrypted
+      check: Does the text state that some internal traffic within the boundary is unencrypted?
+    - id: sc8-cleartext-admin
+      breaks: 2
+      inject: legacy storage appliances are administered over Telnet and files are transferred to them over FTP
+      check: Does the text state that some administration or file transfer uses an unencrypted protocol (for example Telnet, FTP or HTTP)?
+    - id: sc8-no-cert-validation
+      breaks: 3
+      inject: certificate validation is disabled for internal service-to-service connections that use self-signed certificates
+      check: Does the text state that certificate validation is disabled or skipped for some connections?
+
+SC-28:
+  params:
+    protect: {value: "confidentiality AND integrity", source: fedramp}
+  require:
+    - all data stores containing federal data are encrypted at rest with FIPS-validated cryptography
+    - backups and snapshots are encrypted at rest
+    - encryption keys are managed in a key management service or HSM, separate from the encrypted data
+    - temporary, cache and log volumes that may contain federal data are encrypted
+  deficiencies:
+    - id: sc28-store-gap
+      breaks: 0
+      inject: the analytics data warehouse that holds a copy of customer data is not encrypted at rest
+      check: Does the text state that some data store holding federal or customer data is not encrypted at rest?
+    - id: sc28-backup-plain
+      breaks: 1
+      inject: nightly database backups written to the backup server are not encrypted
+      check: Does the text state that backups or snapshots are not encrypted?
+    - id: sc28-key-colocated
+      breaks: 2
+      inject: the data encryption key is stored in plaintext on the same volume as the encrypted data
+      check: Does the text state that encryption keys are stored in plaintext or alongside the data they protect?
+    - id: sc28-temp-plain
+      breaks: 3
+      inject: temporary processing volumes and application log volumes that may contain federal data are not encrypted
+      check: Does the text state that temporary, scratch, cache or log volumes that may contain federal data are not encrypted?
+
+CM-7:
+  params:
+    review: {value: "at least annually", source: spike}
+    baseline: {value: "CIS Benchmarks or DISA STIGs (see CM-6)", source: fedramp}
+  require:
+    - systems are configured to provide only mission-essential capabilities per CIS Benchmarks or DISA STIGs
+    - a list of prohibited or restricted functions, ports, protocols and services is maintained
+    - unnecessary functions, ports, protocols and services are disabled
+    - enabled ports, protocols and services are reviewed at least annually
+  deficiencies:
+    - id: cm7-extra-services
+      breaks: 2
+      inject: Telnet, FTP and the vendor's remote support service remain enabled on production hosts with no documented business need
+      check: Does the text state that unnecessary or unjustified services, ports or protocols remain enabled?
+    - id: cm7-no-review
+      breaks: 3
+      inject: the enabled ports and services were set at system build and have never been reviewed since
+      check: Does the text state that enabled ports, protocols or services are not periodically reviewed?
+    - id: cm7-no-list
+      breaks: 1
+      inject: no list of prohibited or restricted ports, protocols and services has been established
+      check: Does the text state that no list of prohibited or restricted functions, ports, protocols or services exists?
+    - id: cm7-default-install
+      breaks: 0
+      inject: servers are deployed from the vendor's default full installation image with all optional components installed and no hardening applied
+      check: Does the text state that systems are deployed with default or full installations without hardening or removal of unneeded components?
+
+SI-2:
+  params:
+    remediate: {value: "within 30 days of release of updates", source: fedramp}
+  require:
+    - security-relevant software and firmware updates are installed within 30 days of release
+    - updates are tested for effectiveness and side effects before installation
+    - all system components, including network appliances and legacy systems, are covered by the patch process
+    - flaw remediation is incorporated into the configuration management process
+  deficiencies:
+    - id: si2-slow-patch
+      breaks: 0
+      inject: security updates are installed in a quarterly maintenance window, up to 90 days after release
+      check: Does the text state that security updates may be installed later than 30 days after release (for example quarterly)?
+    - id: si2-no-test
+      breaks: 1
+      inject: updates are applied directly to production without prior testing
+      check: Does the text state that updates are installed without testing them first?
+    - id: si2-component-gap
+      breaks: 2
+      inject: network appliances and the legacy reporting server are excluded from the patch process
+      check: Does the text state that some system components are excluded from patching or flaw remediation?
+    - id: si2-no-cm
+      breaks: 3
+      inject: patches are applied ad hoc by individual administrators outside the change and configuration management process
+      check: Does the text state that patching is performed outside the configuration or change management process?
+
+RA-5:
+  params:
+    scan: {value: "monthly for operating systems/infrastructure, web applications (including APIs) and databases", source: fedramp}
+    remediate: {value: "high within 30 days, moderate within 90 days, low within 180 days", source: fedramp}
+  require:
+    - operating systems/infrastructure, web applications (including APIs) and databases are scanned monthly
+    - infrastructure scans are authenticated (credentialed)
+    - high-risk vulnerabilities are remediated within 30 days, moderate within 90 days, low within 180 days
+    - all components in the inventory are in scan scope
+  deficiencies:
+    - id: ra5-infrequent
+      breaks: 0
+      inject: vulnerability scans are run quarterly
+      check: Does the text state that vulnerability scans are run less often than monthly (for example quarterly)?
+    - id: ra5-unauthenticated
+      breaks: 1
+      inject: infrastructure scans are unauthenticated network scans only
+      check: Does the text state that scans are unauthenticated or non-credentialed only?
+    - id: ra5-slow-high
+      breaks: 2
+      inject: high-risk vulnerabilities are remediated within 90 days
+      check: Does the text state that high-risk vulnerabilities may take longer than 30 days to remediate?
+    - id: ra5-scope-gap
+      breaks: 3
+      inject: web applications and databases are not scanned; only operating systems are in scope
+      check: Does the text state that some component type (for example web applications, APIs or databases) is not scanned?
+
+CP-9:
+  params:
+    frequency: {value: "daily incremental and weekly full backups", source: fedramp}
+  require:
+    - user-level and system-level information is backed up daily incremental and weekly full
+    - system documentation, including security-related documentation, is backed up on the same schedule
+    - a backup copy is stored at an alternate site or region separate from the primary
+    - backups are tested for reliability and integrity through periodic restores
+  deficiencies:
+    - id: cp9-untested
+      breaks: 3
+      inject: backups have never been restored or tested
+      check: Does the text state that backups are not tested or have never been restored?
+    - id: cp9-no-offsite
+      breaks: 2
+      inject: all backup copies are stored in the same data center (or same region) as the primary system
+      check: Does the text state that all backups are stored at the same site or region as the primary system?
+    - id: cp9-infrequent
+      breaks: 0
+      inject: backups are taken weekly only, with no daily incremental backups
+      check: Does the text state that backups are taken less often than daily incremental (for example weekly only)?
+    - id: cp9-no-docs
+      breaks: 1
+      inject: system and security documentation is not included in backups
+      check: Does the text state that system or security documentation is not backed up?
